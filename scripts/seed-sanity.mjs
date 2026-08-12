@@ -53,7 +53,7 @@ const isFresh = process.argv.includes("--fresh");
 const client = createClient({
   projectId: requiredEnv("NEXT_PUBLIC_SANITY_PROJECT_ID"),
   dataset: requiredEnv("NEXT_PUBLIC_SANITY_DATASET"),
-  token: requiredEnv("SANITY_API_READ_TOKEN"),
+  token: requiredEnv("SANITY_API_WRITE_TOKEN"),
   apiVersion: "2025-01-01",
   useCdn: false,
 });

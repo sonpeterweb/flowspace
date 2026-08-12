@@ -1,6 +1,6 @@
 # Flowspace
 
-[![CI](https://github.com/sonpeterweb/demo-project-collaboration-next-sanity/actions/workflows/ci.yml/badge.svg)](https://github.com/sonpeterweb/demo-project-collaboration-next-sanity/actions/workflows/ci.yml) · **39 unit tests** + **5 Playwright e2e** scenarios (home, blog, contact, docs)
+[![CI](https://github.com/sonpeterweb/flowspace/actions/workflows/ci.yml/badge.svg)](https://github.com/sonpeterweb/flowspace/actions/workflows/ci.yml) · **39 unit tests** + **5 Playwright e2e** scenarios (home, blog, contact, docs)
 
 **CMS-driven marketing platform built with Next.js + Sanity** — demonstrates headless CMS, preview, caching, admin CRUD, and SEO. Portfolio demo for Upwork.
 
