@@ -6,6 +6,8 @@ export const env = createEnv({
     APP_URL: z.string().url().min(1),
     GITHUB_ID: z.string().min(1),
     GITHUB_SECRET: z.string().min(1),
+    /** Comma-separated GitHub usernames allowed to access the admin panel. */
+    ADMIN_GITHUB_LOGIN: z.string().min(1),
     NEXTAUTH_URL: z.string().url().optional(),
     NEXTAUTH_SECRET: z.string().min(1),
     SANITY_API_READ_TOKEN: z.string().optional(),
@@ -20,6 +22,7 @@ export const env = createEnv({
     APP_URL: process.env.APP_URL,
     GITHUB_ID: process.env.GITHUB_ID,
     GITHUB_SECRET: process.env.GITHUB_SECRET,
+    ADMIN_GITHUB_LOGIN: process.env.ADMIN_GITHUB_LOGIN,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     SANITY_API_READ_TOKEN: process.env.SANITY_API_READ_TOKEN,
