@@ -116,7 +116,7 @@ When content is published in Sanity, trigger ISR cache busting without a full re
    **One-click demo** (after deploy, replace host and secret):
 
    ```
-   https://flowspacestudio.vercel.app/api/preview?secret=YOUR_PREVIEW_SECRET&slug=blog/how-high-performing-teams-stay-aligned
+   https://flowspacestudio.vercel.app/api/preview?secret=YOUR_PREVIEW_SECRET&slug=blog/how-a-12-person-product-team-reduced-weekly-status-meetings
    ```
 
    Shorthand for blog posts only: `?secret=…&slug=your-post-slug` (auto-prefixes `blog/`).

@@ -10,15 +10,15 @@ type CachedFetchOptions = {
 };
 
 /**
- * Fetch published Sanity content with Next.js ISR caching.
- * Use for marketing and other public, non-preview routes.
+ * Published Sanity fetch wrapped in Next.js ISR cache tags.
+ * Returns null in CI placeholder projects so builds do not require a real dataset.
  */
 export async function cachedSanityFetch<T>(
   cacheKey: string[],
   query: string,
   params: Record<string, unknown> = {},
   options: CachedFetchOptions = {},
-): Promise<T> {
+): Promise<T | null> {
   const revalidate = options.revalidate ?? MARKETING_REVALIDATE_SECONDS;
   const tags = options.tags ?? cacheKey;
 
@@ -33,7 +33,7 @@ export async function cachedSanityFetch<T>(
   } catch (error) {
     if (isCiSanityEnvironment()) {
       console.warn("Sanity fetch skipped in CI:", error);
-      return null as T;
+      return null;
     }
     throw error;
   }

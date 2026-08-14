@@ -19,14 +19,14 @@ const sidebarItems = [
 
 const contentItems = [
   {
-    title: "How High-Performing Teams Stay Aligned",
+    title: "How a 12-person product team reduced weekly status meetings",
     type: "Blog post",
-    meta: "Published · 2 days ago",
+    meta: "Published · 3 days ago",
     accent: "bg-rose-500",
     highlight: "Live",
   },
   {
-    title: "5 Workflow Automations Every PM Should Set Up",
+    title: "Designing permissions for client-facing project workspaces",
     type: "Blog post",
     meta: "Draft · awaiting review",
     accent: "bg-amber-500",
@@ -49,7 +49,7 @@ const contentItems = [
 const floatingBadges = [
   {
     icon: Newspaper,
-    label: "9 blog posts",
+    label: "5 blog posts",
     position: "top-left" as const,
     delay: 0.8,
   },

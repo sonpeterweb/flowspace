@@ -22,7 +22,7 @@ export default defineType({
       name: "cta",
       type: "string",
       title: "CTA Label",
-      description: "Primary hero button label (links to /case-studies)",
+      description: "Primary hero button label (links to /features)",
     }),
     defineField({
       name: "features",

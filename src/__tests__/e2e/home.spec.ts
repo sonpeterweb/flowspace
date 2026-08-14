@@ -7,10 +7,15 @@ test.describe("Home page", () => {
     await expect(page).toHaveTitle(/Flowspace/);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(
-      page.getByText("CMS-powered marketing", { exact: true }),
+      page.getByRole("link", { name: "Explore Features" }),
     ).toBeVisible();
     await expect(
-      page.getByText("Preview before publish", { exact: true }),
+      page.getByRole("link", { name: "View Case Studies" }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("Portfolio demonstration built with Next.js + Sanity", {
+        exact: true,
+      }),
     ).toBeVisible();
   });
 

@@ -97,7 +97,7 @@ export default async function HomePage() {
 
         <Section
           title="What customers say"
-          description="Sample testimonials — editable in Sanity."
+          description="Teams that keep projects, docs, and conversations in one place."
         >
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {safeTestimonials.map((t, i) => (
@@ -115,7 +115,7 @@ export default async function HomePage() {
         </Section>
 
         <Integrations
-          title="Built with"
+          title="Integrations"
           items={integrations.map((item) => ({
             name: item.name,
             href: item.href ?? undefined,

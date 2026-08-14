@@ -23,11 +23,11 @@ async function getHome(): Promise<HomePage | null> {
 
 export default async function Hero() {
   const home = await getHome();
-  const title = home?.heroTitle ?? "CMS-Driven Marketing, Built to Ship.";
+  const title = home?.heroTitle ?? "Work Together. Flow Better.";
   const subtitle =
     home?.heroSubtitle ??
-    "A portfolio demo built with Next.js and Sanity — headless CMS, preview mode, ISR caching, admin CRUD, and SEO.";
-  const cta = home?.cta ?? "View case studies";
+    "A modern collaboration workspace for teams that want projects, knowledge and communication in one place.";
+  const cta = home?.cta ?? "Explore Features";
 
   return (
     <Section className="py-16 md:py-20 lg:py-24" containerClassName="max-w-6xl">

@@ -31,7 +31,7 @@ const POSTS_PER_PAGE = 6;
 export const metadata: Metadata = buildMetadata({
   title: "Blog",
   description:
-    "Insights, tutorials, and CMS engineering notes from the Flowspace demo.",
+    "Notes on meetings, permissions, migrations, and how small teams run projects.",
 });
 
 type BlogPageProps = {
@@ -86,7 +86,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       <main id="main-content">
         <Section
           title="Blog"
-          description="Demo blog posts with search, tags, and Portable Text — seeded portfolio content."
+          description="Practical notes from teams figuring out how to work together."
         >
           <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex-1">

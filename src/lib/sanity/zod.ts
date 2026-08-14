@@ -1,18 +1,12 @@
 import { z } from "zod";
 
-/**
- * Zod schemas for runtime validation of Sanity content
- * These schemas ensure type safety and validate data fetched from Sanity
- */
-
-/** Sanity system fields — optional because GROQ projections vary by query. */
+/** Optional: GROQ projections omit system fields depending on the query. */
 const sanitySystemFields = {
   _rev: z.string().optional(),
   _createdAt: z.string().optional(),
   _updatedAt: z.string().optional(),
 };
 
-// Common schemas
 const imageSchema = z.object({
   _type: z.literal("image"),
   _key: z.string(),
@@ -28,7 +22,6 @@ const slugSchema = z.object({
   current: z.string(),
 });
 
-// Portable Text block schema (simplified)
 const portableTextBlockSchema = z.object({
   _type: z.string(),
   _key: z.string(),
@@ -50,7 +43,6 @@ const portableTextSchema = z.array(
   z.union([portableTextBlockSchema, imageSchema]),
 );
 
-// Site Settings Schema
 export const siteSettingsSchema = z.object({
   _id: z.string(),
   _type: z.literal("siteSettings"),
@@ -71,7 +63,6 @@ export const siteSettingsSchema = z.object({
 
 export type SiteSettings = z.infer<typeof siteSettingsSchema>;
 
-// Home Page Schema (hero fields)
 export const homePageSchema = z.object({
   _id: z.string(),
   _type: z.literal("pageHome"),
@@ -82,7 +73,6 @@ export const homePageSchema = z.object({
 
 export type HomePage = z.infer<typeof homePageSchema>;
 
-// Integration Schema
 export const integrationSchema = z.object({
   _id: z.string(),
   _type: z.literal("integration"),
@@ -94,7 +84,6 @@ export const integrationSchema = z.object({
 
 export type Integration = z.infer<typeof integrationSchema>;
 
-// Feature Schema
 export const featureSchema = z.object({
   _id: z.string(),
   _type: z.literal("feature"),
@@ -107,7 +96,6 @@ export const featureSchema = z.object({
 
 export type Feature = z.infer<typeof featureSchema>;
 
-// Pricing Tier Schema
 export const pricingTierSchema = z.object({
   _id: z.string(),
   _type: z.literal("pricingTier"),
@@ -122,7 +110,6 @@ export const pricingTierSchema = z.object({
 
 export type PricingTier = z.infer<typeof pricingTierSchema>;
 
-// Testimonial Schema
 export const testimonialSchema = z.object({
   _id: z.string(),
   _type: z.literal("testimonial"),
@@ -136,7 +123,6 @@ export const testimonialSchema = z.object({
 
 export type Testimonial = z.infer<typeof testimonialSchema>;
 
-// Author Schema (simplified reference)
 export const authorReferenceSchema = z.object({
   _type: z.literal("reference"),
   _ref: z.string(),
@@ -156,7 +142,6 @@ export const authorSummarySchema = z.object({
 
 export type AuthorSummary = z.infer<typeof authorSummarySchema>;
 
-// Author Schema (full)
 export const authorSchema = z.object({
   _id: z.string(),
   _type: z.literal("author"),
@@ -169,7 +154,6 @@ export const authorSchema = z.object({
 
 export type Author = z.infer<typeof authorSchema>;
 
-// Blog Post Schema
 export const blogPostSchema = z.object({
   _id: z.string(),
   _type: z.literal("blogPost"),
@@ -187,7 +171,6 @@ export const blogPostSchema = z.object({
 
 export type BlogPost = z.infer<typeof blogPostSchema>;
 
-// Blog Post with populated author
 export const blogPostWithAuthorSchema = blogPostSchema
   .omit({ author: true, content: true })
   .extend({
@@ -197,7 +180,6 @@ export const blogPostWithAuthorSchema = blogPostSchema
 
 export type BlogPostWithAuthor = z.infer<typeof blogPostWithAuthorSchema>;
 
-// Case Study Schema
 export const caseStudySchema = z.object({
   _id: z.string(),
   _type: z.literal("caseStudy"),
@@ -222,7 +204,6 @@ export const caseStudySchema = z.object({
 
 export type CaseStudy = z.infer<typeof caseStudySchema>;
 
-// Doc Page Schema
 const docParentSchema = z
   .object({
     _id: z.string(),
@@ -257,7 +238,6 @@ export const docNavItemSchema = z.object({
 
 export type DocNavItem = z.infer<typeof docNavItemSchema>;
 
-// Contact Submission Schema
 export const contactSubmissionSchema = z.object({
   _id: z.string(),
   _type: z.literal("contactSubmission"),
@@ -275,7 +255,6 @@ export const contactSubmissionSchema = z.object({
 
 export type ContactSubmission = z.infer<typeof contactSubmissionSchema>;
 
-// Helper function to validate and parse Sanity data
 export function validateSanityData<T>(
   schema: z.ZodSchema<T>,
   data: unknown,
@@ -283,7 +262,6 @@ export function validateSanityData<T>(
   return schema.parse(data);
 }
 
-// Helper function to safely validate (returns result instead of throwing)
 export function safeValidateSanityData<T>(
   schema: z.ZodSchema<T>,
   data: unknown,

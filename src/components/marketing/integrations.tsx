@@ -18,7 +18,7 @@ export type IntegrationsProps = {
 
 export default function Integrations({
   className,
-  title = "Built with",
+  title = "Integrations",
   items,
 }: IntegrationsProps) {
   return (

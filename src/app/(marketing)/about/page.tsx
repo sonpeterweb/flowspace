@@ -30,8 +30,9 @@ export default async function AboutPage() {
               accessibility, and thoughtful design.
             </p>
             <p>
-              This site demonstrates a modern, CMS-driven marketing stack
-              powered by Next.js and Sanity.
+              Flowspace brings projects, shared knowledge, and team
+              communication into one workspace — so everyone stays aligned
+              without jumping between tools.
             </p>
           </div>
         </Section>

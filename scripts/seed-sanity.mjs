@@ -87,7 +87,7 @@ async function seedSiteSettings() {
     _type: "siteSettings",
     siteTitle: "Flowspace",
     metaDescription:
-      "CMS-driven marketing platform built with Next.js + Sanity — headless CMS, preview, caching, admin CRUD, and SEO.",
+      "A modern collaboration workspace for teams that want projects, knowledge and communication in one place.",
     navLinks: [
       { label: "Features", href: "/features" },
       { label: "Pricing", href: "/pricing" },
@@ -104,10 +104,10 @@ async function seedHomePage() {
 
   await client.create({
     _type: "pageHome",
-    heroTitle: "CMS-Driven Marketing, Built to Ship.",
+    heroTitle: "Work Together. Flow Better.",
     heroSubtitle:
-      "A portfolio demo built with Next.js and Sanity — headless CMS, preview mode, ISR caching, admin CRUD, and SEO.",
-    cta: "View case studies",
+      "A modern collaboration workspace for teams that want projects, knowledge and communication in one place.",
+    cta: "Explore Features",
   });
 }
 
@@ -231,12 +231,11 @@ async function seedIntegrations() {
   if (!isFresh && (await hasDocuments("integration"))) return;
 
   const integrations = [
-    { name: "Sanity", href: "https://www.sanity.io", sortOrder: 1 },
-    { name: "Next.js", href: "https://nextjs.org", sortOrder: 2 },
-    { name: "Tailwind CSS", href: "https://tailwindcss.com", sortOrder: 3 },
-    { name: "Vercel", href: "https://vercel.com", sortOrder: 4 },
-    { name: "GitHub", href: "https://github.com", sortOrder: 5 },
-    { name: "Radix UI", href: "https://www.radix-ui.com", sortOrder: 6 },
+    { name: "Slack", href: "https://slack.com", sortOrder: 1 },
+    { name: "GitHub", href: "https://github.com", sortOrder: 2 },
+    { name: "Google Drive", href: "https://drive.google.com", sortOrder: 3 },
+    { name: "Figma", href: "https://www.figma.com", sortOrder: 4 },
+    { name: "Notion", href: "https://www.notion.so", sortOrder: 5 },
   ];
 
   for (const integration of integrations) {
@@ -301,46 +300,25 @@ async function seedTestimonials() {
 
   const testimonials = [
     {
-      name: "Alex Taylor",
-      company: "Northwind Labs",
+      name: "Operations Lead",
+      company: "Illustrative · product team, ~12 people",
       quote:
-        "Flowspace cut our coordination overhead in half and helped us ship faster across three time zones.",
+        "Monday status meetings dropped from 45 minutes to a written check-in. Blockers were already on the board before we joined the call.",
       rating: 5,
     },
     {
-      name: "Priya Sharma",
-      company: "Brightpath Studio",
+      name: "Product Manager",
+      company: "Illustrative · B2B SaaS",
       quote:
-        "We replaced four tools with Flowspace. Onboarding was smooth and the team adopted it in a week.",
+        "Client projects finally had their own permission boundary. Stakeholders saw progress without reading internal threads.",
       rating: 5,
     },
     {
-      name: "Marcus Chen",
-      company: "Atlas Dev Co.",
+      name: "Design Director",
+      company: "Illustrative · agency studio",
       quote:
-        "The automations alone save us hours every sprint. Status updates write themselves now.",
-      rating: 5,
-    },
-    {
-      name: "Elena Rodriguez",
-      company: "Summit Health",
-      quote:
-        "Security and audit logs were non-negotiable for us. Flowspace checked every box.",
+        "Handoffs stopped living in three Slack channels. The brief, Figma link, and approval notes sat next to the ticket.",
       rating: 4,
-    },
-    {
-      name: "James Okonkwo",
-      company: "Riverstone Agency",
-      quote:
-        "Client projects finally live in one place. Our PMs spend less time chasing updates.",
-      rating: 5,
-    },
-    {
-      name: "Sarah Kim",
-      company: "Launchpad HQ",
-      quote:
-        "From standups to retros, everything connects. It's the operating system for our product team.",
-      rating: 5,
     },
   ];
 
@@ -356,19 +334,19 @@ async function seedAuthors() {
 
   const authors = [
     {
-      name: "Jordan Smith",
-      slug: "jordan-smith",
-      bio: "Product engineer writing about collaboration and team workflows.",
+      name: "Jordan Lee",
+      slug: "jordan-lee",
+      bio: "Writes about how small product teams run projects day to day.",
     },
     {
-      name: "Maya Patel",
-      slug: "maya-patel",
-      bio: "Engineering lead focused on async communication and developer productivity.",
+      name: "Maya Ortiz",
+      slug: "maya-ortiz",
+      bio: "Former eng lead on a remote tooling team.",
     },
     {
       name: "Chris Alvarez",
       slug: "chris-alvarez",
-      bio: "Design ops consultant helping teams scale without losing clarity.",
+      bio: "Helps agencies keep design handoffs and client feedback in one place.",
     },
   ];
 
@@ -390,120 +368,68 @@ async function seedBlogPosts(authors) {
 
   const posts = [
     {
-      title: "How High-Performing Teams Stay Aligned",
+      title: "How a 12-person product team reduced weekly status meetings",
       excerpt:
-        "Practical strategies for keeping distributed teams focused and accountable.",
-      tags: ["collaboration", "productivity"],
+        "What changed when updates lived on the board instead of a recurring calendar invite.",
+      tags: ["collaboration", "meetings"],
       authorIndex: 0,
-      daysAgo: 2,
+      daysAgo: 3,
       content: blocks(
-        "Great teams don't rely on endless meetings. They build systems for visibility, feedback, and accountability.",
-        "Start with a shared source of truth for priorities, then automate status updates so everyone knows what changed.",
-        "Weekly async check-ins replace daily standups when work is documented well.",
+        "We used to spend Monday mornings restating work that was already written somewhere else.",
+        "Moving status into the project board meant the meeting only covered decisions and blockers.",
+        "The first two weeks felt awkward. By week four, people stopped asking for a slide deck.",
       ),
     },
     {
-      title: "5 Workflow Automations Every PM Should Set Up",
+      title: "Designing permissions for client-facing project workspaces",
       excerpt:
-        "Save hours each week with these high-impact automation recipes.",
-      tags: ["productivity", "automation"],
+        "A practical model for sharing progress without exposing internal discussion.",
+      tags: ["permissions", "clients"],
+      authorIndex: 1,
+      daysAgo: 9,
+      content: blocks(
+        "Clients need visibility. They do not need every Slack-adjacent debate attached to a task.",
+        "We settled on project-level guest roles with a curated view: milestones, files, and approved notes.",
+        "Default-deny on internal comments saved more support time than any onboarding doc.",
+      ),
+    },
+    {
+      title: "What we learned migrating a team from spreadsheets to shared workflows",
+      excerpt:
+        "A small pilot beat a big-bang import — and cleaned data mattered more than speed.",
+      tags: ["migration", "workflows"],
       authorIndex: 0,
-      daysAgo: 5,
+      daysAgo: 16,
       content: blocks(
-        "Automations shine when they remove repetitive handoffs — not when they hide important decisions.",
-        "Start with assignment rules when a task moves to 'In Review', then add reminder nudges for stale items.",
-        "Connect Slack notifications for blockers only, so channels stay signal-heavy.",
+        "One team, one workflow, two sprints of parallel tracking. That was the deal.",
+        "Mapping spreadsheet columns to fields before import caught naming messes early.",
+        "Cutover happened when the pilot team stopped opening the sheet first.",
       ),
     },
     {
-      title: "Async-First Communication: A Practical Guide",
+      title: "When GitHub issues and the project board disagree",
       excerpt:
-        "How to run a distributed team without drowning in meetings.",
-      tags: ["collaboration", "remote"],
+        "Pick a source of truth, then automate the boring sync — not the judgment calls.",
+      tags: ["engineering", "integrations"],
       authorIndex: 1,
-      daysAgo: 8,
+      daysAgo: 23,
       content: blocks(
-        "Async-first doesn't mean never meeting — it means meetings are intentional and documented.",
-        "Write decisions in the tool where work lives. Context switching kills momentum.",
-        "Use Loom or short screen recordings for complex walkthroughs instead of live demos across time zones.",
+        "Duplicate status updates create quiet distrust between eng and product.",
+        "We made GitHub the source for implementation state and the board the source for planning state.",
+        "PR links on tasks beat copying titles into a second tracker.",
       ),
     },
     {
-      title: "Building a Culture of Documentation",
+      title: "Running a remote retrospective that produces three action items",
       excerpt:
-        "Why writing things down scales better than tribal knowledge.",
-      tags: ["productivity", "culture"],
-      authorIndex: 1,
-      daysAgo: 12,
-      content: blocks(
-        "Documentation is a product decision, not an afterthought. Treat docs like features with owners and review cycles.",
-        "Start with onboarding guides and runbooks — they pay off immediately for new hires.",
-        "Link docs from tasks so people find answers in context.",
-      ),
-    },
-    {
-      title: "Design Ops at Scale: Lessons from Brightpath Studio",
-      excerpt:
-        "How one agency unified design handoffs and client feedback.",
-      tags: ["case-study", "design"],
-      authorIndex: 2,
-      daysAgo: 15,
-      content: blocks(
-        "Brightpath consolidated Figma comments, client approvals, and dev tickets into one Flowspace workspace.",
-        "Designers tag engineers directly on components. Fewer Slack threads, faster sign-off.",
-        "Client-facing views keep stakeholders in the loop without access to internal boards.",
-      ),
-    },
-    {
-      title: "Security Best Practices for Team Workspaces",
-      excerpt:
-        "SSO, permissions, and audit logs — what to configure on day one.",
-      tags: ["security", "enterprise"],
-      authorIndex: 1,
-      daysAgo: 18,
-      content: blocks(
-        "Enable SSO before inviting the full org. Map groups to roles early.",
-        "Use project-level permissions for client work. Default-deny beats cleanup later.",
-        "Review audit logs monthly — patterns reveal process gaps before they become incidents.",
-      ),
-    },
-    {
-      title: "From Spreadsheets to Flowspace: A Migration Playbook",
-      excerpt:
-        "A step-by-step plan for moving project tracking off spreadsheets.",
-      tags: ["productivity", "migration"],
-      authorIndex: 0,
-      daysAgo: 22,
-      content: blocks(
-        "Don't migrate everything at once. Pick one team and one workflow to pilot.",
-        "Map spreadsheet columns to custom fields before import. Clean data beats fast data.",
-        "Run parallel for two sprints, then cut over when confidence is high.",
-      ),
-    },
-    {
-      title: "Integrating GitHub Issues with Your Project Board",
-      excerpt:
-        "Keep engineering and product in sync with bi-directional sync.",
-      tags: ["integration", "engineering"],
-      authorIndex: 1,
-      daysAgo: 26,
-      content: blocks(
-        "Link PRs to tasks so reviewers see full context without leaving GitHub.",
-        "Status sync rules prevent duplicate updates — define which side is source of truth.",
-        "Use labels to route bugs vs features into the right Flowspace projects automatically.",
-      ),
-    },
-    {
-      title: "Running Effective Remote Retrospectives",
-      excerpt:
-        "Templates and rituals that keep retros actionable, not performative.",
-      tags: ["collaboration", "remote"],
+        "Collect input async, limit the list, and track follow-through like real work.",
+      tags: ["remote", "culture"],
       authorIndex: 2,
       daysAgo: 30,
       content: blocks(
-        "Collect input async before the live session. Quiet voices get equal weight.",
-        "Limit action items to three. More than that means nothing gets done.",
-        "Track retro actions as tasks with owners — visibility drives follow-through.",
+        "Async prompts before the call gave quieter teammates equal weight.",
+        "Three action items max. Anything else went to a parking lot with an owner for later.",
+        "Retro actions became tasks with due dates — otherwise they vanished by Thursday.",
       ),
     },
   ];

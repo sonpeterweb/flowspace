@@ -12,12 +12,6 @@ export type HeroClientProps = {
   cta?: string | null;
 };
 
-const highlights = [
-  "CMS-powered marketing",
-  "Blog, docs & admin",
-  "Preview before publish",
-];
-
 export function HeroClient({ title, subtitle, cta }: HeroClientProps) {
   const reduceMotion = useReducedMotion();
 
@@ -29,6 +23,8 @@ export function HeroClient({ title, subtitle, cta }: HeroClientProps) {
           animate: { opacity: 1, y: 0 },
           transition: { duration: 0.55, ease: "easeOut" as const, delay },
         };
+
+  const primaryLabel = cta?.trim() || "Explore Features";
 
   return (
     <div className="relative">
@@ -44,12 +40,12 @@ export function HeroClient({ title, subtitle, cta }: HeroClientProps) {
       <div className="grid min-w-0 items-center gap-12 lg:grid-cols-2 lg:gap-16">
         {/* Copy */}
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-          <motion.div
+          <motion.p
             {...fadeUp(0)}
-            className="bg-primary/10 text-primary mb-4 inline-flex items-center rounded-full px-3 py-1 text-xs font-medium tracking-wide"
+            className="text-muted-foreground mb-3 text-sm font-medium tracking-wide"
           >
-            CMS-driven marketing demo
-          </motion.div>
+            Flowspace
+          </motion.p>
 
           <motion.h1
             {...fadeUp(0.05)}
@@ -65,38 +61,29 @@ export function HeroClient({ title, subtitle, cta }: HeroClientProps) {
             {subtitle}
           </motion.p>
 
-          <motion.ul
+          <motion.div
             {...fadeUp(0.25)}
-            className="mt-5 flex flex-wrap justify-center gap-2 lg:justify-start"
+            className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
           >
-            {highlights.map((item) => (
-              <li
-                key={item}
-                className="bg-muted/60 text-muted-foreground rounded-full px-3 py-1 text-xs font-medium"
-              >
-                {item}
-              </li>
-            ))}
-          </motion.ul>
-
-          {cta && (
-            <motion.div
-              {...fadeUp(0.35)}
-              className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start"
+            <Button asChild size="lg" className="cursor-pointer">
+              <Link href="/features">{primaryLabel}</Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="cursor-pointer"
             >
-              <Button asChild size="lg" className="cursor-pointer">
-                <Link href="/case-studies">{cta}</Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="cursor-pointer"
-              >
-                <Link href="/features">See features</Link>
-              </Button>
-            </motion.div>
-          )}
+              <Link href="/case-studies">View Case Studies</Link>
+            </Button>
+          </motion.div>
+
+          <motion.p
+            {...fadeUp(0.35)}
+            className="text-muted-foreground/80 mt-6 max-w-md text-xs"
+          >
+            Portfolio demonstration built with Next.js + Sanity
+          </motion.p>
         </div>
 
         {/* Product promo */}

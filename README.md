@@ -2,9 +2,9 @@
 
 [![CI](https://github.com/sonpeterweb/flowspace/actions/workflows/ci.yml/badge.svg)](https://github.com/sonpeterweb/flowspace/actions/workflows/ci.yml) · **39 unit tests** + **5 Playwright e2e** scenarios (home, blog, contact, docs)
 
-**CMS-driven marketing platform built with Next.js + Sanity** — demonstrates headless CMS, preview, caching, admin CRUD, and SEO. Portfolio demo for Upwork.
+Flowspace is a fictional collaboration brand used to demonstrate a production-style SaaS marketing stack. Product claims and customer stories are illustrative; the CMS, preview, admin, caching, search, and testing functionality is fully implemented.
 
-> **Marketing demo** — product features, case studies, testimonials, and pricing are illustrative content. The CMS pipeline, preview mode, caching, admin CRUD, and tests are fully implemented.
+**Built with:** Next.js 15 · React 19 · Sanity · Zod · NextAuth · Tailwind CSS · Playwright
 
 ## Live demo
 
@@ -23,23 +23,6 @@
 
 **Quick deploy:** Push to Vercel → set env vars from [`.env.example`](.env.example) → run `npm run seed:sanity:fresh` → update the links above.
 
----
-
-## What's real vs. demo content
-
-| Real (implemented) | Demo / illustrative |
-|--------------------|---------------------|
-| Sanity CMS schemas, Studio, GROQ queries, Zod validation | Product copy, case studies, testimonials, pricing tiers |
-| Draft preview mode with secure secret + middleware guard | Docs references to `api.flowspace.dev` and SSO workflows |
-| ISR caching + on-demand revalidation webhook | Enterprise feature lists in seeded pricing |
-| GitHub OAuth admin CRUD (blog, testimonials, pricing, contact) | Fictional customer names and outcome metrics |
-| Blog search, docs hub, contact form → Sanity storage | “Collaboration platform” branding as sample vertical |
-| Jest unit tests + Playwright e2e + GitHub Actions CI | — |
-
-This is a **marketing-site portfolio piece**, not a collaboration SaaS product. **Marketing demo — product features are illustrative content.** It shows how I'd build a CMS-driven site for a real client.
-
----
-
 ## Lighthouse scores
 
 Measured on [flowspacestudio.vercel.app](https://flowspacestudio.vercel.app) (June 2026, mobile simulation):
@@ -50,8 +33,6 @@ Measured on [flowspacestudio.vercel.app](https://flowspacestudio.vercel.app) (Ju
 | Accessibility | **92** |
 | Best Practices | **100** |
 | SEO | **100** |
-
----
 
 ## Architecture
 
@@ -91,29 +72,23 @@ flowchart LR
 
 **Preview pipeline:** `/api/preview?secret=…&slug=…` validates `SANITY_PREVIEW_SECRET`, enables draft mode, sets an auth cookie, and redirects. **Admin panel** uses `/api/admin/preview?slug=…` (GitHub session, no secret) with Preview buttons on the dashboard and each blog post.
 
----
+## Features
 
-## Portfolio case study
+- Marketing pages powered by Sanity (home, features, pricing, about, case studies, contact)
+- CMS-managed product integrations strip on the home page
+- Blog with search, tags, pagination, and per-post OG images
+- Documentation hub with sidebar navigation and search
+- Case study listing and detail pages with outcome metrics
+- Dynamic SEO (sitemap, robots, metadata helpers)
+- GitHub OAuth admin panel with CRUD for blog posts, testimonials, and pricing — allowlisted admins only
+- Separate Sanity read vs write API tokens
+- Secret-protected preview mode for draft Sanity content
+- ISR caching, optimized Sanity images, and accessibility improvements
 
-**Problem:** Teams need a marketing site where non-developers can publish pages, blog posts, and docs — with draft preview, fast performance, and an admin layer for operational content.
+## Testing
 
-**What I built:**
-
-- Headless CMS integration with Sanity (schemas, GROQ queries, Zod validation)
-- Marketing pages, blog, docs hub, and case study detail routes — all CMS-driven
-- Draft preview mode with secret auth, visual indicator, and secure exit route
-- ISR caching with cache tags and on-demand revalidation via Sanity webhook
-- GitHub OAuth admin panel with CRUD for blog posts, testimonials, pricing, and contact submissions
-- Per-post Open Graph images from Sanity assets
-- Accessible UI (skip links, semantic HTML, form validation)
-- Seed script with `--fresh` flag for demo-ready content
-- **39 unit tests** + **5 Playwright e2e** scenarios — CI: lint → typecheck → test → build → e2e ([badge above](#flowspace))
-
-**Stack:** Next.js 15 · React 19 · Sanity · Zod · NextAuth · Tailwind CSS · Playwright
-
-See [SANITY_SETUP.md](SANITY_SETUP.md) for CMS credentials, Studio deploy, webhook, and preview configuration.
-
----
+- **39** Jest unit tests and **5** Playwright e2e scenarios
+- GitHub Actions CI: lint → typecheck → test → build → e2e ([badge above](#flowspace))
 
 ## Preview mode demo
 
@@ -122,7 +97,7 @@ See [SANITY_SETUP.md](SANITY_SETUP.md) for CMS credentials, Studio deploy, webho
 **Manual URL** (for sharing with non-admin reviewers): set `SANITY_PREVIEW_SECRET` in Vercel, then open:
 
 ```
-https://flowspacestudio.vercel.app/api/preview?secret=YOUR_SECRET&slug=blog/how-high-performing-teams-stay-aligned
+https://flowspacestudio.vercel.app/api/preview?secret=YOUR_SECRET&slug=blog/how-a-12-person-product-team-reduced-weekly-status-meetings
 ```
 
 A yellow preview bar appears on every page until you click **Exit Preview** or visit `/api/exit-preview`.
@@ -130,25 +105,10 @@ A yellow preview bar appears on every page until you click **Exit Preview** or v
 For local dev:
 
 ```
-http://localhost:3000/api/preview?secret=YOUR_SECRET&slug=blog/how-high-performing-teams-stay-aligned
+http://localhost:3000/api/preview?secret=YOUR_SECRET&slug=blog/how-a-12-person-product-team-reduced-weekly-status-meetings
 ```
 
-Shorthand for blog posts: `?slug=how-high-performing-teams-stay-aligned` (auto-prefixes `blog/`).
-
----
-
-## Features
-
-- Marketing pages powered by Sanity (home, features, pricing, about, case studies, contact)
-- CMS-managed integrations strip on the home page
-- Blog with search, tags, pagination, and per-post OG images
-- Documentation hub with sidebar navigation and search
-- Case study listing and detail pages with outcome metrics
-- Dynamic SEO (sitemap, robots, metadata helpers)
-- GitHub OAuth admin panel with CRUD for blog posts, testimonials, and pricing
-- Secret-protected preview mode for draft Sanity content
-- ISR caching, optimized Sanity images, and accessibility improvements
-- 39 Jest unit tests and 5 Playwright e2e scenarios with GitHub Actions CI
+Shorthand for blog posts: `?slug=how-a-12-person-product-team-reduced-weekly-status-meetings` (auto-prefixes `blog/`).
 
 ## Getting started
 

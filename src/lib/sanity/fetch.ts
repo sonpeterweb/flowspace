@@ -14,14 +14,14 @@ type SanityFetchOptions = {
 };
 
 /**
- * Fetch Sanity content with ISR caching for published routes.
- * Bypasses cache automatically when preview mode is active.
+ * Sanity fetch with ISR for published routes.
+ * Preview mode bypasses the cache so drafts are never served from stale tags.
  */
 export async function sanityFetch<T>(
   query: string,
   params: Record<string, unknown> = {},
   options: SanityFetchOptions = {},
-): Promise<T> {
+): Promise<T | null> {
   const preview = options.preview ?? (await isPreviewMode());
 
   if (preview) {
@@ -31,7 +31,7 @@ export async function sanityFetch<T>(
     } catch (error) {
       if (isCiSanityEnvironment()) {
         console.warn("Sanity preview fetch skipped in CI:", error);
-        return null as T;
+        return null;
       }
       throw error;
     }
