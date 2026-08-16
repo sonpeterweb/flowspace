@@ -19,10 +19,11 @@ This guide covers Sanity project setup, environment variables, Studio deploy, an
 4. You'll need:
    - **Project ID** — under "Project ID" (e.g. `abc12345`)
    - **Dataset** — usually `production`
-   - **API Token** (optional but recommended for preview mode)
+   - **API Tokens** (separate read vs write scopes)
      - Go to **API** → **Tokens**
-     - Create a token with **Editor** permission (minimum to read draft content)
-     - **Note:** Viewer only reads published content; use Editor or higher for preview mode
+     - `SANITY_API_READ_TOKEN` — for draft/preview reads (Viewer+; use Editor if draft access fails)
+     - `SANITY_API_WRITE_TOKEN` — for mutations (admin CRUD, contact form, seed); **Editor** or higher
+     - Prefer two tokens so a leaked preview credential cannot mutate content
 
 ## Step 3: Configure Environment Variables
 
@@ -32,6 +33,7 @@ Create `.env.local` in the project root (see [`.env.example`](.env.example)):
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id_here
 NEXT_PUBLIC_SANITY_DATASET=production
 SANITY_API_READ_TOKEN=your_read_token_here
+SANITY_API_WRITE_TOKEN=your_write_token_here
 SANITY_PREVIEW_SECRET=your_preview_secret_here
 SANITY_REVALIDATE_SECRET=your_webhook_secret_here
 APP_URL=http://localhost:3000
@@ -42,6 +44,7 @@ APP_URL=http://localhost:3000
 - `NEXT_PUBLIC_*` variables are exposed to the browser
 - Never commit `.env.local` to git (already in `.gitignore`)
 - Environment variables are validated at build time
+- Keep read and write tokens separate — names should match privilege
 
 ## Step 4: Deploy Sanity Studio (optional)
 
@@ -99,7 +102,7 @@ When content is published in Sanity, trigger ISR cache busting without a full re
 
 ## Step 7: Preview Draft Content
 
-1. Set `SANITY_API_READ_TOKEN` with **Editor** permission (Viewer cannot read drafts).
+1. Set `SANITY_API_READ_TOKEN` for draft/preview reads (not the write token).
 2. Set `SANITY_PREVIEW_SECRET` (e.g. `openssl rand -hex 32`) — required in production so only authorized users can enable draft mode.
 3. In Studio, leave **Published At** empty on a blog post to keep it as a draft.
 4. **From the admin panel:** sign in at `/admin` and click **Preview** on a blog post, or **Preview home page** on the dashboard (opens draft mode in a new tab — no secret in the URL).

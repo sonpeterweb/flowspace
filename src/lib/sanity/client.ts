@@ -20,20 +20,20 @@ export const client = createClient({
 /**
  * Sanity client for write operations (authenticated mutations)
  * No CDN, direct connection to Sanity API
- * Requires authentication token for admin operations
+ * Requires SANITY_API_WRITE_TOKEN (Editor+) for admin/contact/seed
  */
 export const writeClient = createClient({
   projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: "2025-01-01",
   useCdn: false, // No CDN for writes
-  token: env.SANITY_API_READ_TOKEN, // Uses Editor token for mutations
+  token: env.SANITY_API_WRITE_TOKEN,
   perspective: "published",
 });
 
 /**
  * Sanity client for preview mode (draft content)
- * Uses token to access unpublished/draft content
+ * Uses SANITY_API_READ_TOKEN to access unpublished/draft content
  * No CDN to ensure fresh draft data
  */
 export const previewClient = createClient({
@@ -41,7 +41,7 @@ export const previewClient = createClient({
   dataset: env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: "2025-01-01",
   useCdn: false, // No CDN for drafts
-  token: env.SANITY_API_READ_TOKEN, // Required for draft access
+  token: env.SANITY_API_READ_TOKEN,
   perspective: "previewDrafts", // Fetch draft content
 });
 

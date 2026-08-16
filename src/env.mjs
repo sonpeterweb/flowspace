@@ -10,7 +10,10 @@ export const env = createEnv({
     ADMIN_GITHUB_LOGIN: z.string().min(1),
     NEXTAUTH_URL: z.string().url().optional(),
     NEXTAUTH_SECRET: z.string().min(1),
+    /** Draft/preview reads only — do not use for mutations. */
     SANITY_API_READ_TOKEN: z.string().optional(),
+    /** Mutations (admin CRUD, contact form, seed) — Editor+ scope. */
+    SANITY_API_WRITE_TOKEN: z.string().optional(),
     SANITY_PREVIEW_SECRET: z.string().optional(),
     SANITY_REVALIDATE_SECRET: z.string().optional(),
   },
@@ -26,6 +29,7 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     SANITY_API_READ_TOKEN: process.env.SANITY_API_READ_TOKEN,
+    SANITY_API_WRITE_TOKEN: process.env.SANITY_API_WRITE_TOKEN,
     SANITY_PREVIEW_SECRET: process.env.SANITY_PREVIEW_SECRET,
     SANITY_REVALIDATE_SECRET: process.env.SANITY_REVALIDATE_SECRET,
     NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
